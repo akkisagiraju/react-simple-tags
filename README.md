@@ -4,6 +4,11 @@
 
 [![NPM](https://img.shields.io/npm/v/react-simple-tags.svg)](https://www.npmjs.com/package/react-simple-tags) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+# Features
+- 🚀 Simple and lightweight (< 700 bytes when gzipped!)
+- ✅ Easy to use
+- 🎨 Customizable styles
+
 ## Install
 
 ```bash
@@ -13,17 +18,43 @@ npm install --save react-simple-tags
 ## Usage
 
 ```tsx
-import React, { Component } from 'react'
+import React from 'react'
 
-import MyComponent from 'react-simple-tags'
+import TagsInput from 'react-simple-tags'
 import 'react-simple-tags/dist/index.css'
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
+const App = () => {
+  const [tagsList, setTagsList] = React.useState<string[]>([])
+
+  const handleTagAddition = (tag: string) => {
+    const newTagsList = tagsList.concat(tag)
+    setTagsList(newTagsList)
   }
+
+  const handleTagRemoval = (tagToBeRemoved: string) => {
+    const newTagsList = tagsList.filter((tag) => tag !== tagToBeRemoved)
+    setTagsList(newTagsList)
+  }
+
+  return (
+    <TagsInput
+      onTagAddition={handleTagAddition}
+      onTagRemoval={handleTagRemoval}
+    />
+  )
 }
+
+export default App
 ```
+# Props
+
+Prop | Type | Required? | Default value
+-----|-----|-----|-----
+```maxTagLength``` | number | no | ```3```
+```uniqueTags``` | boolean | no | ```true```
+```onTagAddition``` | func | yes | N/A
+```onTagRemoval``` | func | yes | N/A
+
 
 ## License
 
