@@ -3,9 +3,17 @@ import styles from './styles.module.css'
 
 interface Props {
   minTagLength?: number
+  uniqueTags?: boolean
+  onTagAddition: (tag: string) => void
+  onTagRemoval: (tag: string) => void
 }
 
-const TagsInput: React.FC<Props> = ({ minTagLength = 3 }) => {
+const TagsInput: React.FC<Props> = ({
+  minTagLength = 3,
+  uniqueTags = true,
+  onTagAddition,
+  onTagRemoval
+}) => {
   const [inputValue, setInputValue] = React.useState<string>('')
   const [tagsList, setTagsList] = React.useState<string[]>([])
 
@@ -22,14 +30,25 @@ const TagsInput: React.FC<Props> = ({ minTagLength = 3 }) => {
       return
     }
     if (event.key === ',' || event.key === ';') {
-      const newTagsList = [...tagsList, inputValue.trim()]
-      setTagsList(newTagsList)
+      addTag(inputValue.trim())
       setInputValue('')
     }
   }
 
   const removeTag = (tagToBeRemoved: string) => {
     const newTagsList = tagsList.filter((tag) => tag !== tagToBeRemoved)
+    onTagRemoval(tagToBeRemoved)
+    setTagsList(newTagsList)
+  }
+
+  const addTag = (tagTobeAdded: string) => {
+    const newTagsList = [...tagsList, tagTobeAdded]
+    onTagAddition(tagTobeAdded)
+    if (uniqueTags) {
+      const uniqueTagList = Array.from(new Set(newTagsList))
+      setTagsList(uniqueTagList)
+      return
+    }
     setTagsList(newTagsList)
   }
 

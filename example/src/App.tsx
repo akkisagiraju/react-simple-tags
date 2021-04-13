@@ -4,7 +4,24 @@ import TagsInput from 'react-simple-tags'
 import 'react-simple-tags/dist/index.css'
 
 const App = () => {
-  return <TagsInput minTagLength={4} />
+  const [tagsList, setTagsList] = React.useState<string[]>([])
+
+  const handleTagAddition = (tag: string) => {
+    const newTagsList = tagsList.concat(tag)
+    setTagsList(newTagsList)
+  }
+
+  const handleTagRemoval = (tagToBeRemoved: string) => {
+    const newTagsList = tagsList.filter((tag) => tag !== tagToBeRemoved)
+    setTagsList(newTagsList)
+  }
+
+  return (
+    <TagsInput
+      onTagAddition={handleTagAddition}
+      onTagRemoval={handleTagRemoval}
+    />
+  )
 }
 
 export default App
