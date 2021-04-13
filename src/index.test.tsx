@@ -1,7 +1,7 @@
-import { ExampleComponent } from '.'
+import TagsInput from '.'
 
-describe('ExampleComponent', () => {
+describe('TagsInput', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(TagsInput).toBeTruthy()
   })
 })
