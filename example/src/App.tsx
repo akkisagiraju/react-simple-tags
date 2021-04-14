@@ -17,10 +17,14 @@ const App = () => {
   }
 
   return (
-    <TagsInput
-      onTagAddition={handleTagAddition}
-      onTagRemoval={handleTagRemoval}
-    />
+    <div>
+      <h1>react-simple-tags</h1>
+      <TagsInput
+        className='custom-class'
+        onTagAddition={handleTagAddition}
+        onTagRemoval={handleTagRemoval}
+      />
+    </div>
   )
 }
 
