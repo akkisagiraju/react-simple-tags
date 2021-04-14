@@ -4,6 +4,7 @@ import styles from './styles.module.css'
 interface Props {
   minTagLength?: number
   uniqueTags?: boolean
+  className?: string
   onTagAddition: (tag: string) => void
   onTagRemoval: (tag: string) => void
 }
@@ -11,6 +12,7 @@ interface Props {
 const TagsInput: React.FC<Props> = ({
   minTagLength = 3,
   uniqueTags = true,
+  className = '',
   onTagAddition,
   onTagRemoval
 }) => {
@@ -53,7 +55,7 @@ const TagsInput: React.FC<Props> = ({
   }
 
   return (
-    <div className={styles['react-simple-tags']}>
+    <div className={`${styles['react-simple-tags']} ${className}`}>
       {tagsList.map((tag) => (
         <span key={`${tag}-${Math.random() * Math.random()}`}>
           {tag}{' '}
